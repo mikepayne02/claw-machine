@@ -28,7 +28,7 @@ resource "incus_storage_volume" "openclaw_data" {
 # Incus assigns the IP — no VLAN config needed on the host.
 resource "incus_instance" "openclaw" {
   name    = "openclaw"
-  image   = "images:debian/12/cloud"
+  image   = "images:debian/13/cloud"
   type    = "container"
   running = true
 

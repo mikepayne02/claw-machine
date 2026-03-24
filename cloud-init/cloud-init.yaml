@@ -3,6 +3,14 @@ package_update: true
 packages:
   - git
 
+# Debian 13 images: image doesn't include ansible in cloud_final_modules.
+# Override with minimal set — packages must run before ansible.
+cloud_final_modules:
+  - package-update-upgrade-install
+  - ansible
+  - scripts-user
+  - final-message
+
 ansible:
   install_method: distro
   galaxy:
@@ -11,7 +19,7 @@ ansible:
   setup_controller:
     run_ansible:
       - playbook_dir: /root/.ansible/collections/ansible_collections/openclaw/installer
-        playbook_name: playbooks/install.yml
+        playbook_names: [playbooks/install.yml]
         connection: local
         inventory: "localhost,"
         extra_vars: "ansible_become=false openclaw_install_mode=production"

@@ -35,9 +35,12 @@ resource "incus_instance" "openclaw" {
   running = true
 
   config = {
-    "security.nesting"     = "true"
-    "limits.cpu"           = var.cpu_cores
-    "limits.memory"        = var.memory
+    "security.nesting"                      = "true"
+    "security.syscalls.intercept.mknod"      = "true"
+    "security.syscalls.intercept.setxattr"   = "true"
+    "linux.kernel_modules"                   = "overlay"
+    "limits.cpu"                             = var.cpu_cores
+    "limits.memory"                          = var.memory
     "cloud-init.user-data" = file("${path.module}/../cloud-init/cloud-init.yaml")
   }
 

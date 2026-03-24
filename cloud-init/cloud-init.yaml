@@ -3,6 +3,16 @@ package_update: true
 packages:
   - git
 
+# Docker-in-LXC: skip br_netfilter check (not loaded on host to avoid
+# breaking br0 bridged traffic). Also create /.dockerenv for nested detection.
+write_files:
+  - path: /etc/systemd/system/docker.service.d/override.conf
+    content: |
+      [Service]
+      Environment="DOCKER_IGNORE_BR_NETFILTER_ERROR=1"
+  - path: /.dockerenv
+    content: ""
+
 # Debian 13 images: image doesn't include ansible in cloud_final_modules.
 # Override with minimal set — packages must run before ansible.
 cloud_final_modules:

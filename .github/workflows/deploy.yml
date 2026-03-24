@@ -1,0 +1,46 @@
+name: Deploy OpenClaw
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tofu/**"
+      - "cloud-init/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "tofu/**"
+      - "cloud-init/**"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, linux, homelab, incus]
+    defaults:
+      run:
+        working-directory: tofu
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup OpenTofu
+        uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_version: "1.9.x"
+
+      - name: Copy tfvars
+        run: cp /home/michael/claw-machine/tofu/terraform.tfvars . || true
+
+      - name: Init
+        run: tofu init
+
+      - name: Validate
+        run: tofu validate
+
+      - name: Plan
+        run: tofu plan -out=tfplan
+
+      - name: Apply
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: tofu apply tfplan

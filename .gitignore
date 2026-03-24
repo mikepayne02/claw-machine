@@ -1,0 +1,10 @@
+# OpenTofu
+tofu/.terraform/
+tofu/.terraform.lock.hcl
+tofu/*.tfstate
+tofu/*.tfstate.backup
+tofu/*.tfplan
+tofu/terraform.tfvars
+
+# Runner secrets
+runner/.env

@@ -1,0 +1,17 @@
+#cloud-config
+package_update: true
+packages:
+  - git
+
+ansible:
+  install_method: distro
+  galaxy:
+    actions:
+      - ["ansible-galaxy", "collection", "install", "git+https://github.com/openclaw/openclaw-ansible.git,main"]
+  setup_controller:
+    run_ansible:
+      - playbook_dir: /root/.ansible/collections/ansible_collections/openclaw/installer
+        playbook_name: playbooks/install.yml
+        connection: local
+        inventory: "localhost,"
+        extra_vars: "ansible_become=false openclaw_install_mode=production"

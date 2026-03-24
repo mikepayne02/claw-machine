@@ -1,0 +1,9 @@
+# Place at ~/claw-machine/tofu/terraform.tfvars on vault (gitignored)
+# and fill in the values.
+
+# All variables have defaults — only override what you need:
+# storage_pool     = "default"
+# data_volume_size = "5GiB"
+# root_disk_size   = "40GiB"
+# cpu_cores        = "2"
+# memory           = "4GiB"

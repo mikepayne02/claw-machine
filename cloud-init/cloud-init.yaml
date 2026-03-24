@@ -20,7 +20,7 @@ ansible:
   setup_controller:
     run_ansible:
       - playbook_dir: /root/.ansible/collections/ansible_collections/openclaw/installer
-        playbook_names: [playbooks/install.yml]
+        playbook_name: playbooks/install.yml
         connection: local
         inventory: "localhost,"
         extra_vars: "ansible_become=false openclaw_install_mode=production"

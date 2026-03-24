@@ -13,6 +13,7 @@ cloud_final_modules:
 
 ansible:
   install_method: distro
+  package_name: ansible
   galaxy:
     actions:
       - ["ansible-galaxy", "collection", "install", "git+https://github.com/openclaw/openclaw-ansible.git,main"]

@@ -7,13 +7,13 @@ variable "storage_pool" {
 variable "data_volume_size" {
   description = "Size of the persistent ~/.openclaw volume"
   type        = string
-  default     = "5GiB"
+  default     = "16GiB"
 }
 
 variable "root_disk_size" {
   description = "Size of the container root disk"
   type        = string
-  default     = "40GiB"
+  default     = "32GiB"
 }
 
 variable "cpu_cores" {

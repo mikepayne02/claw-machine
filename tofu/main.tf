@@ -8,7 +8,9 @@ terraform {
     }
   }
 
-  backend "local" {}
+  backend "local" {
+    path = "/home/michael/claw-machine/tofu/terraform.tfstate"
+  }
 }
 
 provider "incus" {}
